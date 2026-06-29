@@ -31,6 +31,25 @@ MIT License per its own repository.
   other than the gateway you host yourself, but it cannot eliminate the risk
   inherent in automated trading with real money.
 
+## TradingView
+
+`mobile`'s Chart screen embeds TradingView's freely-embeddable "Advanced
+Real-Time Chart" widget (loaded at runtime from `https://s3.tradingview.com/tv.js`)
+to show a reference price chart for the asset behind a Kalshi market (e.g.
+the BTC price a `crypto15m` contract tracks) — Kalshi's own contract
+tickers aren't on TradingView's symbol list, so this is not a literal
+Kalshi-market chart.
+
+- This is a separate third-party/CDN touchpoint from the Krypt-Trader
+  relationship above: a device running the mobile app loads TradingView's
+  script directly from TradingView's own servers when the Chart tab is used.
+- No Kalshi account data, credentials, positions, or Krypt-Trader data are
+  sent to TradingView. The only input is the symbol/interval text the user
+  types into the Chart screen (e.g. `BINANCE:BTCUSDT`, `15`).
+- TradingView's own terms of use govern that widget; this repository does
+  not vendor or modify its code, only loads it via a standard `<script>` tag
+  inside a `WebView`.
+
 ## This repository's own license
 
 This repository does not currently declare a license for its own original

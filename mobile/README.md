@@ -31,8 +31,8 @@ no web backing, so the web preview won't persist them across reloads.
 src/lib/         RpcClient (WebSocket JSON-RPC client), secureStore,
                   EngineContext (connection state via React context)
 src/components/   StatusBanner, ConfirmButton, JsonView (shared UI)
-src/screens/      Connect, Dashboard, Signals, Scanner, Activity, Controls,
-                  Settings
+src/screens/      Connect, Dashboard, Signals, Scanner, Chart, Activity,
+                  Controls, Settings
 src/navigation/   RootNavigator (Connect screen vs. tabbed main app)
 ```
 

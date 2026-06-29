@@ -5,6 +5,7 @@ import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useEngine } from '../lib/EngineContext';
 import ActivityScreen from '../screens/ActivityScreen';
+import ChartScreen from '../screens/ChartScreen';
 import ConnectScreen from '../screens/ConnectScreen';
 import ControlsScreen from '../screens/ControlsScreen';
 import DashboardScreen from '../screens/DashboardScreen';
@@ -21,6 +22,7 @@ function MainTabs() {
       <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Signals" component={SignalsScreen} />
       <Tab.Screen name="Scanner" component={ScannerScreen} />
+      <Tab.Screen name="Chart" component={ChartScreen} />
       <Tab.Screen name="Controls" component={ControlsScreen} />
       <Tab.Screen name="Activity" component={ActivityScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />

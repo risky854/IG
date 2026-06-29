@@ -39,8 +39,8 @@ mobile/                 Expo (React Native, TypeScript) app
                           (expo-secure-store wrapper), EngineContext (React
                           context for connection state), useEngineEvent
   src/components/        StatusBanner, ConfirmButton, JsonView
-  src/screens/           Connect, Dashboard, Signals, Scanner, Activity,
-                          Controls, Settings
+  src/screens/           Connect, Dashboard, Signals, Scanner, Chart,
+                          Activity, Controls, Settings
   src/navigation/        RootNavigator
   App.tsx, app.json, package.json, tsconfig.json
   README.md
@@ -61,7 +61,10 @@ README.md, THIRD_PARTY_NOTICES.md, CLAUDE.md   Root-level docs
   product targets are iOS and Android. Note: `react-native-web`'s
   `Alert.alert` is an intentional no-op stub upstream, so confirmation
   dialogs (used throughout `Controls`/`Settings`) only actually fire on
-  iOS/Android, not in the web preview.
+  iOS/Android, not in the web preview. `react-native-webview` (used by
+  `ChartScreen` to embed a TradingView widget) similarly has no web
+  implementation and renders its own "not supported on this platform"
+  fallback there — the chart itself only renders on iOS/Android.
 
 ## Build / run / test commands
 
