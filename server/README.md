@@ -47,6 +47,31 @@ Tailscale) — a client that completes the auth handshake can place real
 trades and call destructive methods like `flatten`, `cancelAllOpen`, and
 `shutdown`. Keep `GATEWAY_TOKEN` secret.
 
+## Deploy persistently + reach it from your phone (Tailscale)
+
+To keep the gateway running across reboots and reach it from your phone
+without exposing it to the public internet:
+
+1. Install [Tailscale](https://tailscale.com/download) on this server and
+   on your phone, and sign both into the same tailnet (`tailscale up` on the
+   server; the Tailscale app on the phone).
+2. Find this server's tailnet address: `tailscale ip -4`, or use its
+   MagicDNS name shown in `tailscale status` (e.g. `neo.your-tailnet.ts.net`).
+   Traffic between Tailscale devices is already encrypted (WireGuard), so
+   `ws://` (not `wss://`) to that address is fine — you don't need a
+   separate TLS cert on top.
+3. Install the gateway as a systemd service so it survives reboots and
+   restarts itself if it crashes:
+   ```bash
+   sudo cp krypt-gateway.service.example /etc/systemd/system/krypt-gateway.service
+   sudo $EDITOR /etc/systemd/system/krypt-gateway.service   # fix YOUR_USER and the paths
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now krypt-gateway
+   journalctl -u krypt-gateway -f    # confirm it started cleanly
+   ```
+4. In the mobile app's Connect screen, use `ws://<tailnet-address>:8765` (or
+   whatever `GATEWAY_PORT` you set) and your `GATEWAY_TOKEN`.
+
 ## Tests
 
 The test suite exercises the gateway against a mock engine fixture

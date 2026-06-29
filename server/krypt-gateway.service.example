@@ -1,0 +1,25 @@
+# Copy to /etc/systemd/system/krypt-gateway.service on your server (e.g. as
+# root: cp krypt-gateway.service.example /etc/systemd/system/krypt-gateway.service),
+# then edit the placeholder paths/user below to match your setup.
+#
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now krypt-gateway
+#   sudo systemctl status krypt-gateway
+#   journalctl -u krypt-gateway -f      # logs
+
+[Unit]
+Description=Krypt Trader mobile gateway
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_USER
+WorkingDirectory=/path/to/IG/server
+EnvironmentFile=/path/to/IG/server/.env
+ExecStart=/path/to/IG/server/.venv/bin/python -m gateway.gateway
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

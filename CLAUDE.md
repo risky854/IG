@@ -32,6 +32,7 @@ server/                Python gateway (asyncio + websockets)
                               no real trading logic)
   requirements.txt
   .env.example
+  krypt-gateway.service.example  systemd unit template for persistent deploy
   README.md
 
 mobile/                 Expo (React Native, TypeScript) app
@@ -108,9 +109,15 @@ eas build --platform ios --profile preview   # optional: real signed .ipa via
 
 ## Deployment
 
-Not yet defined beyond "run `server/gateway` on a machine you control,
-behind TLS (reverse proxy or a private network like Tailscale), and point
-the mobile app at it." No CI, container image, or hosting setup exists yet.
+Documented path: run `server/gateway` on a machine you control, behind TLS
+(reverse proxy) or a private network like Tailscale, and point the mobile
+app at it. `server/krypt-gateway.service.example` is a systemd unit template
+for keeping it running persistently; `server/README.md`'s "Deploy
+persistently + reach it from your phone (Tailscale)" section walks through
+both that and reaching it from a phone over a tailnet (no TLS cert needed
+there since Tailscale's WireGuard transport is already encrypted). No CI or
+container image exists yet — that template is the only packaged deploy
+artifact so far.
 
 ## Working conventions
 
