@@ -42,7 +42,7 @@ mobile/                 Expo (React Native, TypeScript) app
   src/screens/           Connect, Dashboard, Signals, Scanner, Chart,
                           Activity, Controls, Settings
   src/navigation/        RootNavigator
-  App.tsx, app.json, package.json, tsconfig.json
+  App.tsx, app.json, eas.json, package.json, tsconfig.json
   README.md
 
 README.md, THIRD_PARTY_NOTICES.md, CLAUDE.md   Root-level docs
@@ -85,6 +85,8 @@ npx tsc --noEmit       # typecheck (no lint config and no automated test
                          # suite yet — don't claim either exists)
 npx expo start          # run (device/simulator)
 npm run web              # browser preview
+eas build --platform ios --profile preview   # optional: real signed .ipa via
+                                               # EAS Build, see mobile/README.md
 ```
 
 ## External services / credentials
@@ -98,6 +100,11 @@ npm run web              # browser preview
   the gateway itself and never touch a third party.
 - The mobile app's `secureStore.ts` persists only the gateway URL/token,
   using `expo-secure-store` (OS keychain/keystore) — not Kalshi credentials.
+- EAS Build (`mobile/eas.json`, optional, for producing a real signed iOS
+  app instead of using Expo Go) is a separate third-party touchpoint: your
+  Apple Developer signing certificate/provisioning profile gets uploaded to
+  or generated on Expo's cloud build infrastructure. It never sees Kalshi or
+  gateway credentials. See `THIRD_PARTY_NOTICES.md`.
 
 ## Deployment
 

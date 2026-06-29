@@ -50,6 +50,27 @@ Kalshi-market chart.
   not vendor or modify its code, only loads it via a standard `<script>` tag
   inside a `WebView`.
 
+## Expo Application Services (EAS Build)
+
+`mobile/eas.json` configures [EAS Build](https://docs.expo.dev/build/introduction/),
+an optional, opt-in path for compiling a standalone, code-signed iOS (or
+Android) app instead of using Expo Go. This is a different kind of
+third-party touchpoint than TradingView above: if you use it, Expo's cloud
+build service compiles your app on their infrastructure, and — unless you
+choose to manage credentials fully locally via a Mac/Xcode build instead —
+your Apple Developer signing certificate and/or provisioning profile are
+uploaded to Expo's servers (or auto-generated there on your behalf) to sign
+the resulting `.ipa`.
+
+- This is entirely optional. `npx expo start` + Expo Go requires no Expo
+  account, no EAS, and no certificate upload.
+- No Kalshi/Krypt-Trader data or gateway credentials are involved in a
+  build — EAS only ever sees your app's source code and signing credentials,
+  never your trading account.
+- See `mobile/README.md`'s "Building a real iOS app" section for the
+  commands, and [Expo's EAS credentials docs](https://docs.expo.dev/app-signing/app-credentials/)
+  for exactly what's stored where.
+
 ## This repository's own license
 
 This repository does not currently declare a license for its own original
